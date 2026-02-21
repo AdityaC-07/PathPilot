@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #111111;
+  /* Very dark grey, almost black */
+  --bg-light: #ffffff;
+  /* For alternating light sections */
+  --card: #1a1a1a;
+  --card-light: #f8f9fa;
+  --border: #333333;
+  --navbar: rgba(17, 17, 17, 0.95);
+
+  /* Vibrant Orange/Red Palette matching the intensity of the reference green */
+  --accent: #ff4400;
+  /* Vibrant Orange-Red */
+  --accent-light: #ff6a33;
+  --accent-dark: #cc3600;
+
+  --text-primary: #ffffff;
+  --text-dark: #111111;
+  /* For text on light sections */
+  --text-secondary: #a0aabf;
+  --text-muted: #6b778c;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-inter);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--navbar);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Select arrow for standard selects */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0aabf' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  appearance: none;
+  -webkit-appearance: none;
+}
