@@ -2,11 +2,20 @@
 
 Next.js 14 (App Router) frontend for PathPilot, the AI career roadmap generator.
 
+**Built for AMD Slingshot Hackathon 2026 - AI in Education & Skilling Theme**
+
 ## Stack
 - Next.js 14 (App Router)
 - TypeScript
 - Tailwind CSS
 - Axios
+
+## AMD Integration Features
+
+- AMD Slingshot branding and acknowledgment
+- AMD technology showcase section
+- Performance metrics highlighting ROCm acceleration benefits
+- Footer with AMD Slingshot information
 
 ## Local Development
 

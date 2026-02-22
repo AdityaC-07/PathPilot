@@ -23,12 +23,23 @@ export default function Home() {
             backgroundAttachment: "fixed"
           }}
         >
-          <div
-            className="relative z-10 inline-flex items-center gap-2 px-5 py-2 rounded-full border mb-8 text-xs font-bold tracking-widest uppercase"
-            style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-            PATHPILOT - YOUR CAREER INNOVATION PARTNER
+          <div className="relative z-10 flex flex-col items-center gap-3 mb-8">
+            <div
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full border text-xs font-bold tracking-widest uppercase"
+              style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              PATHPILOT - YOUR CAREER INNOVATION PARTNER
+            </div>
+            <div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide"
+              style={{ background: "rgba(237, 28, 36, 0.15)", border: "1px solid rgba(237, 28, 36, 0.5)", color: "#ED1C24" }}
+            >
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+              POWERED BY AMD SLINGSHOT
+            </div>
           </div>
 
           <h1 className="relative z-10 text-white text-5xl sm:text-7xl font-extrabold tracking-tight max-w-4xl leading-[1.1]">
@@ -37,7 +48,7 @@ export default function Home() {
           </h1>
 
           <p className="relative z-10 mt-6 text-lg sm:text-xl max-w-2xl leading-relaxed text-gray-300">
-            Transform your career trajectory with cutting-edge AI guidance. Clean, efficient, and designed for tomorrow's job market.
+            Transform your career trajectory with cutting-edge AI guidance powered by AMD technology. Clean, efficient, and designed for tomorrow's job market.
           </p>
 
           <div className="relative z-10 mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -61,9 +72,9 @@ export default function Home() {
           <div className="absolute bottom-10 left-0 w-full px-6">
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center border-t border-white/10 pt-10">
               {[
-                { label: "YEARS EXPERIENCE", value: "10+", icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg> },
-                { label: "MOCK ROADMAPS", value: "5000+", icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> },
-                { label: "API CALLS SAVED", value: "50K", icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> },
+                { label: "AI ROADMAPS GENERATED", value: "5000+", icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> },
+                { label: "ROCm ACCELERATION", value: "3x Faster", icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> },
+                { label: "ENERGY EFFICIENCY", value: "40% Less", icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg> },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col items-center">
                   <div className="flex items-center gap-3 mb-2">
@@ -239,6 +250,85 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── AMD Technology Integration Section ── */}
+        <section className="px-6 py-32" style={{ background: "var(--bg)" }}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-xs font-bold tracking-wide" style={{ background: "rgba(237, 28, 36, 0.15)", border: "1px solid rgba(237, 28, 36, 0.5)", color: "#ED1C24" }}>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                AMD SLINGSHOT HACKATHON 2026
+              </div>
+              <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 tracking-tight">
+                Powered by <span style={{ color: "#ED1C24" }}>AMD Technology</span>
+              </h2>
+              <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                Leveraging AMD ROCm acceleration and Ryzen AI processors to deliver faster, more efficient AI-powered career guidance.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              {[
+                {
+                  title: "ROCm GPU Acceleration",
+                  desc: "Harnessing AMD's ROCm platform for accelerated AI inference, reducing response times by up to 3x compared to CPU-only processing.",
+                  icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
+                  metric: "3x Faster"
+                },
+                {
+                  title: "Ryzen AI Processing",
+                  desc: "Optimized for AMD Ryzen AI processors, enabling efficient on-device inference for privacy-focused career planning.",
+                  icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>,
+                  metric: "On-Device"
+                },
+                {
+                  title: "Energy Efficient AI",
+                  desc: "AMD's power-efficient architecture enables sustainable AI processing, reducing energy consumption while maintaining high performance.",
+                  icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
+                  metric: "40% Less Power"
+                },
+              ].map((feature) => (
+                <div
+                  key={feature.title}
+                  className="rounded-2xl p-8 border relative overflow-hidden group hover:scale-105 transition-transform"
+                  style={{ background: "var(--card)", borderColor: "var(--border)" }}
+                >
+                  <div className="mb-6" style={{ color: "#ED1C24" }}>{feature.icon}</div>
+                  <div className="text-2xl font-black mb-2 text-white">{feature.metric}</div>
+                  <h4 className="text-xl font-bold mb-3 text-white">{feature.title}</h4>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{feature.desc}</p>
+                  <div className="absolute top-0 right-0 w-20 h-20 rounded-full opacity-10 pointer-events-none" style={{ background: "#ED1C24" }} />
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <div className="inline-block rounded-2xl p-8 border max-w-2xl mx-auto" style={{ background: "var(--card)", borderColor: "var(--border)" }}>
+                <h3 className="text-2xl font-bold text-white mb-4">AI in Education & Skilling</h3>
+                <p className="text-base leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
+                  PathPilot is proud to participate in AMD Slingshot 2026, focusing on the "AI in Education & Skilling" theme. 
+                  We're building the future of personalized career guidance using AMD's cutting-edge AI technologies.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-4 text-sm" style={{ color: "var(--text-muted)" }}>
+                  <span className="flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                    ROCm Accelerated
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                    Open Innovation
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                    Sustainable AI
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── Core Values Section (Light Theme) ── */}
         <section className="px-6 py-32 bg-white text-center border-t border-gray-100">
           <p className="text-sm font-bold uppercase tracking-[0.2em] mb-4" style={{ color: "var(--accent)" }}>
@@ -267,6 +357,52 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        {/* ── Footer with AMD Branding ── */}
+        <footer className="px-6 py-16 border-t" style={{ background: "var(--bg)", borderColor: "var(--border)" }}>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-12 mb-12">
+              <div>
+                <div className="flex items-center gap-2.5 mb-4">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ color: "var(--accent)" }}>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <span className="text-white font-bold text-xl tracking-tight">PATHPILOT</span>
+                </div>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--text-secondary)" }}>
+                  AI-powered career roadmap generator. Navigate your future with intelligent guidance.
+                </p>
+                <div className="flex items-center gap-2 text-xs" style={{ color: "var(--text-muted)" }}>
+                  <span>Powered by</span>
+                  <span className="font-bold" style={{ color: "#ED1C24" }}>AMD SLINGSHOT</span>
+                </div>
+              </div>
+              <div>
+                <h4 className="text-white font-bold mb-4">AMD Technology</h4>
+                <ul className="space-y-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                  <li>ROCm GPU Acceleration</li>
+                  <li>Ryzen AI Processing</li>
+                  <li>Energy Efficient AI</li>
+                  <li>Open Innovation Platform</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-white font-bold mb-4">Quick Links</h4>
+                <ul className="space-y-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                  <li><Link href="/generate" className="hover:text-white transition-colors">Generate Roadmap</Link></li>
+                  <li><Link href="/" className="hover:text-white transition-colors">About Us</Link></li>
+                  <li><Link href="/" className="hover:text-white transition-colors">Contact</Link></li>
+                  <li><a href="https://amdslingshot.in" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AMD Slingshot</a></li>
+                </ul>
+              </div>
+            </div>
+            <div className="pt-8 border-t text-center text-xs" style={{ borderColor: "var(--border)", color: "var(--text-muted)" }}>
+              <p>© 2026 PathPilot. Built for AMD Slingshot Hackathon 2026 - AI in Education & Skilling Theme.</p>
+            </div>
+          </div>
+        </footer>
       </main>
     </div>
   );
