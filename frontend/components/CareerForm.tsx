@@ -15,6 +15,7 @@ const getSelectStyle = (hasError: boolean) =>
 interface FormState {
     education: string;
     field_of_study: string;
+    skills: string;
     career_goal: string;
     learning_pace: string;
     weekly_hours: string;
@@ -52,6 +53,12 @@ const FIELDS: {
                 { value: "engineering", label: "Engineering (Non-CS)" },
                 { value: "technology", label: "Computer Science & Technology" },
             ]
+        },
+        {
+            id: "skills",
+            label: "Current Skills (comma-separated)",
+            type: "text",
+            options: []
         },
         {
             id: "career_goal",
@@ -112,6 +119,7 @@ export default function CareerForm() {
     const [form, setForm] = useState<FormState>({
         education: "",
         field_of_study: "",
+        skills: "",
         career_goal: "",
         learning_pace: "",
         weekly_hours: "",
@@ -123,6 +131,8 @@ export default function CareerForm() {
     const validate = () => {
         const errs: Partial<FormState> = {};
         FIELDS.forEach((f) => {
+            // Skip validation for skills (optional field)
+            if (f.id === "skills") return;
             if (!form[f.id]) errs[f.id] = "Please select an option";
         });
         setErrors(errs);
@@ -168,22 +178,41 @@ export default function CareerForm() {
                         style={{ color: "var(--text-secondary)" }}
                     >
                         {field.label}
+                        {field.id === "skills" && (
+                            <span className="text-xs font-normal ml-2" style={{ color: "var(--text-muted)" }}>
+                                (Optional)
+                            </span>
+                        )}
                     </label>
-                    <select
-                        id={field.id}
-                        value={form[field.id]}
-                        onChange={(e) => {
-                            setForm((p) => ({ ...p, [field.id]: e.target.value }));
-                            setErrors((p) => ({ ...p, [field.id]: undefined }));
-                        }}
-                        className={getSelectStyle(!!errors[field.id])}
-                    >
-                        {field.options.map((opt) => (
-                            <option key={opt.value} value={opt.value} disabled={opt.value === ""}>
-                                {opt.label}
-                            </option>
-                        ))}
-                    </select>
+                    {field.type === "text" ? (
+                        <input
+                            type="text"
+                            id={field.id}
+                            value={form[field.id]}
+                            onChange={(e) => {
+                                setForm((p) => ({ ...p, [field.id]: e.target.value }));
+                                setErrors((p) => ({ ...p, [field.id]: undefined }));
+                            }}
+                            placeholder="e.g. Python, JavaScript, Data Analysis"
+                            className={getSelectStyle(!!errors[field.id])}
+                        />
+                    ) : (
+                        <select
+                            id={field.id}
+                            value={form[field.id]}
+                            onChange={(e) => {
+                                setForm((p) => ({ ...p, [field.id]: e.target.value }));
+                                setErrors((p) => ({ ...p, [field.id]: undefined }));
+                            }}
+                            className={getSelectStyle(!!errors[field.id])}
+                        >
+                            {field.options.map((opt) => (
+                                <option key={opt.value} value={opt.value} disabled={opt.value === ""}>
+                                    {opt.label}
+                                </option>
+                            ))}
+                        </select>
+                    )}
                     {errors[field.id] && (
                         <p className="text-red-500 text-xs mt-1 font-medium">{errors[field.id]}</p>
                     )}

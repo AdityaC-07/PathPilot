@@ -1,14 +1,41 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import CareerForm from "@/components/CareerForm";
 import Link from "next/link";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-    title: "Generate Roadmap – PathPilot",
-    description: "Fill in your profile to get an AI-generated career roadmap.",
-};
 
 export default function GeneratePage() {
+    const router = useRouter();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Check if user is authenticated
+        const token = localStorage.getItem("auth_token");
+        if (!token) {
+            router.replace("/auth");
+        } else {
+            setIsAuthenticated(true);
+        }
+        setLoading(false);
+    }, [router]);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--bg)" }}>
+                <div className="text-center">
+                    <p style={{ color: "var(--text-muted)" }}>Loading...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!isAuthenticated) {
+        return null;
+    }
+
     return (
         <div className="min-h-screen flex flex-col" style={{ background: "var(--bg)" }}>
             <Navbar />

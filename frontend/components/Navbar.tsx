@@ -1,6 +1,28 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+    const router = useRouter();
+    const [user, setUser] = useState<any>(null);
+
+    useEffect(() => {
+        // Check if user is logged in
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("user");
+        setUser(null);
+        router.push("/auth");
+    };
+
     return (
         <nav
             className="sticky top-0 z-50 w-full px-6 py-4 flex items-center justify-between border-b backdrop-blur-md"
@@ -37,16 +59,34 @@ export default function Navbar() {
                 </Link>
             </div>
 
-            <Link
-                href="/generate"
-                className="px-6 py-2.5 rounded-lg text-sm font-bold transition-all hover:bg-[var(--accent)] hover:text-white"
-                style={{
-                    color: "var(--accent)",
-                    border: "1px solid var(--accent)",
-                }}
-            >
-                Free Consultation
-            </Link>
+            {user ? (
+                <div className="flex items-center gap-4">
+                    <span className="text-white text-sm font-medium">
+                        {user.full_name}
+                    </span>
+                    <button
+                        onClick={handleLogout}
+                        className="px-6 py-2.5 rounded-lg text-sm font-bold transition-all hover:bg-[var(--accent)] hover:text-white"
+                        style={{
+                            color: "var(--accent)",
+                            border: "1px solid var(--accent)",
+                        }}
+                    >
+                        Logout
+                    </button>
+                </div>
+            ) : (
+                <Link
+                    href="/auth"
+                    className="px-6 py-2.5 rounded-lg text-sm font-bold transition-all hover:bg-[var(--accent)] hover:text-white"
+                    style={{
+                        color: "var(--accent)",
+                        border: "1px solid var(--accent)",
+                    }}
+                >
+                    Sign In
+                </Link>
+            )}
         </nav>
     );
 }

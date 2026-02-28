@@ -1,7 +1,10 @@
 import os
 from dotenv import load_dotenv
+import logging
 
 load_dotenv()
+
+logger = logging.getLogger(__name__)
 
 OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
 OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
@@ -17,4 +20,5 @@ except (subprocess.TimeoutExpired, FileNotFoundError, Exception):
     AMD_ROCM_AVAILABLE = False
 
 if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY is not set in environment variables.")
+    logger.warning("OPENAI_API_KEY is not set. Career roadmap generation will not work.")
+

@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import { MOCK_DATA } from "@/lib/mockData";
-import type { CareerRoadmapResponse } from "@/lib/api";
+import { generateRoadmap, type CareerRoadmapResponse } from "@/lib/api";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ResultCard from "@/components/ResultCard";
 
@@ -22,24 +21,55 @@ export default function ResultsPage() {
     const [data, setData] = useState<CareerRoadmapResponse | null>(null);
     const [profile, setProfile] = useState<Record<string, string> | null>(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
     useEffect(() => {
-        const raw = sessionStorage.getItem("pp_profile");
-        if (!raw) { router.replace("/generate"); return; }
+        const fetchRoadmap = async () => {
+            const raw = sessionStorage.getItem("pp_profile");
+            const token = localStorage.getItem("auth_token");
 
-        const parsed = JSON.parse(raw);
-        setProfile(parsed);
+            if (!raw) {
+                router.replace("/generate");
+                return;
+            }
 
-        const background: string = parsed.field_of_study?.toLowerCase() || "technology";
-        const roadmap = MOCK_DATA[background] || MOCK_DATA.technology;
+            if (!token) {
+                router.replace("/auth");
+                return;
+            }
 
-        // Simulate a brief AI "thinking" delay
-        const t = setTimeout(() => {
-            setData(roadmap);
-            setLoading(false);
-        }, 1800);
+            const parsed = JSON.parse(raw);
+            setProfile(parsed);
 
-        return () => clearTimeout(t);
+            try {
+                // Call the actual API
+                const result = await generateRoadmap(
+                    {
+                        education: parsed.education,
+                        field_of_study: parsed.field_of_study,
+                        skills: parsed.skills || "",
+                        career_goal: parsed.career_goal,
+                        learning_pace: parsed.learning_pace,
+                        weekly_hours: parseInt(parsed.weekly_hours),
+                        location: parsed.location,
+                    },
+                    token
+                );
+
+                setData(result);
+                setLoading(false);
+            } catch (err: unknown) {
+                const error = err as { response?: { data?: { detail?: string } } };
+                console.error("Error generating roadmap:", error);
+                setError(
+                    error.response?.data?.detail ||
+                        "Failed to generate roadmap. Please try again."
+                );
+                setLoading(false);
+            }
+        };
+
+        fetchRoadmap();
     }, [router]);
 
     return (
@@ -65,6 +95,25 @@ export default function ResultsPage() {
                             style={{ background: "var(--card)", borderColor: "var(--border)" }}
                         >
                             <LoadingSpinner />
+                        </div>
+                    )}
+
+                    {/* Error */}
+                    {error && !loading && (
+                        <div
+                            className="rounded-3xl border p-8 shadow-2xl"
+                            style={{ background: "var(--card)", borderColor: "var(--border)" }}
+                        >
+                            <div className="text-center">
+                                <p className="text-red-500 mb-4">{error}</p>
+                                <Link
+                                    href="/generate"
+                                    className="inline-flex px-8 py-4 rounded-full border text-sm font-bold transition-all hover:bg-white/5"
+                                    style={{ borderColor: "var(--accent)", color: "white" }}
+                                >
+                                    ← Try Again
+                                </Link>
+                            </div>
                         </div>
                     )}
 

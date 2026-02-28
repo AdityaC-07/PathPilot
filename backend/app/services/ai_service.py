@@ -7,10 +7,16 @@ from app.models import UserProfileRequest, CareerRoadmapResponse, SkillGapAnalys
 
 logger = logging.getLogger(__name__)
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+# Only initialize client if API key is available
+client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
 
 
 def generate_career_roadmap(profile: UserProfileRequest) -> CareerRoadmapResponse:
+    if not client or not OPENAI_API_KEY:
+        raise RuntimeError(
+            "OpenAI API key is not configured. Please set OPENAI_API_KEY in your environment variables."
+        )
+    
     user_prompt = build_user_prompt(
         education=profile.education,
         field_of_study=profile.field_of_study,
