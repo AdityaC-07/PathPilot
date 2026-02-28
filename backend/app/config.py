@@ -6,6 +6,7 @@ load_dotenv()
 
 logger = logging.getLogger(__name__)
 
+# OpenAI is optional - system works with hardcoded data
 OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
 OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 FRONTEND_ORIGIN: str = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000")
@@ -19,6 +20,4 @@ try:
 except (subprocess.TimeoutExpired, FileNotFoundError, Exception):
     AMD_ROCM_AVAILABLE = False
 
-if not OPENAI_API_KEY:
-    logger.warning("OPENAI_API_KEY is not set. Career roadmap generation will not work.")
 

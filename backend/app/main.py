@@ -59,6 +59,27 @@ async def get_current_user(authorization: Optional[str] = Header(None)) -> dict:
         raise HTTPException(status_code=401, detail="User not found")
 
 
+@app.get("/")
+async def root():
+    """Root endpoint - API information"""
+    return {
+        "message": "PathPilot API - AI-powered career roadmap generator",
+        "version": "1.0.0",
+        "status": "running",
+        "endpoints": {
+            "health": "/health",
+            "auth": {
+                "signup": "POST /auth/signup",
+                "signin": "POST /auth/signin",
+                "me": "GET /auth/me"
+            },
+            "generate": "POST /generate (requires auth)",
+            "amd_info": "/amd/info"
+        },
+        "docs": "/docs"
+    }
+
+
 @app.get("/health")
 async def health_check():
     return {
